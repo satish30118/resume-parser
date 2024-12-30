@@ -1,4 +1,6 @@
 import re
+import sys
+import json
 import spacy
 from pdfminer.high_level import extract_text
 from datetime import datetime
@@ -146,7 +148,7 @@ if __name__ == "__main__":
     file_path = sys.argv[1]
     resume_data = parse_resume(file_path)
     print(resume_data)
-    print(json.dumps(parsed_data))    ## added
+    print(json.dumps(resume_data))    ## added
     text = extract_text_from_pdf(file_path)
     a=extract_experience(text)
     
