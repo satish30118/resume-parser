@@ -1,38 +1,90 @@
-.App {
+/* General Container */
+.container {
+  font-family: Arial, sans-serif;
   text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
+  background: #f9f9f9;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Title Styles */
+.title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Upload Section */
+.upload-section {
+  margin-bottom: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.file-input {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.upload-button {
+  background-color: #007bff;
   color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.upload-button:hover {
+  background-color: #0056b3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Loader */
+.loader {
+  margin: 20px 0;
+  font-size: 1.5rem;
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Result Section */
+.result-section {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.result-content {
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: left;
+  overflow-x: auto;
+  font-family: monospace;
+}
+
+/* Message Styling */
+.message {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #ff4500; /* Updated to a vibrant orange-red color */
+  font-style: italic;
+}
+
+.message span {
+  font-weight: bold;
+  color: #d32f2f; /* A slightly darker red for emphasis */
 }

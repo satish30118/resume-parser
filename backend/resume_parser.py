@@ -148,17 +148,18 @@ if __name__ == "__main__":
     file_path = sys.argv[1]
     resume_data = parse_resume(file_path)
     print(resume_data)
-    print(json.dumps(resume_data))    ## added
-    text = extract_text_from_pdf(file_path)
-    a=extract_experience(text)
+    # # print(json.dumps(resume_data))    ## added
+    # text = extract_text_from_pdf(file_path)
+    # a=extract_experience(text)
     
-    sentiment_scores = analyze_experience_sentiment(a)
-    for key, sentiment in sentiment_scores.items():
-        print(f"{key}:")
-        print(f"  Text: {sentiment['Text']}")
-        print(f"  Polarity: {sentiment['Polarity']}")
-        print(f"  Subjectivity: {sentiment['Subjectivity']}")
+    # sentiment_scores = analyze_experience_sentiment(a)
+    # for key, sentiment in sentiment_scores.items():
+    #     print(f"{key}:")
+    #     print(f"  Text: {sentiment['Text']}")
+    #     print(f"  Polarity: {sentiment['Polarity']}")
+    #     print(f"  Subjectivity: {sentiment['Subjectivity']}")
         
-    # print("Achievements", extract_achievements(text))
-    # print("Highlighted Achievements", highlight_achievements(text))
-    print("Projects", extract_projects(text))
+    # # print("Achievements", extract_achievements(text))
+    # # print("Highlighted Achievements", highlight_achievements(text))
+    # print("Projects", extract_projects(text))
+    

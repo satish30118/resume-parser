@@ -16,10 +16,12 @@ app.post("/upload-resume", upload.single("resume"), (req, res) => {
 
     // Invoke Python script
     const pythonProcess = spawn("python", ["resume_parser.py", req.file.path]);
+    // console.log(pythonProcess)
 
     let output = "";
     pythonProcess.stdout.on("data", (data) => {
         output += data.toString();
+        console.log(output)
     });
 
     pythonProcess.stderr.on("data", (error) => {
@@ -29,10 +31,12 @@ app.post("/upload-resume", upload.single("resume"), (req, res) => {
     pythonProcess.on("close", () => {
         // Send parsed data back to the frontend
         try {
-            const parsedData = JSON.parse(output);
-            res.json(parsedData);
+            // const parsedData = JSON.parse(output);
+            // console.log(parsedData)
+            res.json(output);
         } catch (err) {
             res.status(500).json({ error: "Error parsing Python output" });
+            // console.log(err)
         }
     });
 });
