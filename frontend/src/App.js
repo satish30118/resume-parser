@@ -33,27 +33,63 @@ function App() {
             setAnalysisResult(response.data);
         } catch (error) {
             console.error("Error uploading file:", error);
+            alert("An error occurred while analyzing the resume. Please try again.");
         } finally {
             setLoading(false); // Stop the loader
         }
     };
 
     return (
-        <div className="container">
-            <h1 className="title">Resume Analyzer</h1>
+        <div className="app-container">
+            <header className="header">
+                <h1 className="title">Resume Analyzer</h1>
+                <p className="subtitle">Upload a resume to get an in-depth analysis of skills, education, and suitability for roles.</p>
+            </header>
+
             <div className="upload-section">
-                <input type="file" onChange={handleFileChange} className="file-input" />
-                <button onClick={handleUpload} className="upload-button">Upload and Analyze</button>
+                <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="file-input"
+                />
+                <button onClick={handleUpload} className="upload-button">
+                    {loading ? "Analyzing..." : "Upload and Analyze"}
+                </button>
             </div>
 
-            {loading && <div className="loader">Analyzing...</div>}
+            {loading && <div className="loader">Analyzing your resume...</div>}
 
             {analysisResult && (
                 <div className="result-section">
-                    <h2 className="result-title">Analysis Result:</h2>
-                    <pre className="result-content">{JSON.stringify(analysisResult, null, 2)}</pre>
+                    <h2 className="result-title">Analysis Result</h2>
+                    <div className="result-content">
+                        <h3>Name: {analysisResult.Name || "Not Found"}</h3>
+                        <h3>Email: {analysisResult.Email.join(", ") || "Not Found"}</h3>
+                        <h3>Phone: {analysisResult.Phone.join(", ") || "Not Found"}</h3>
+                        <h3>Skills:</h3>
+                        <ul>
+                            {analysisResult.Skills.length > 0
+                                ? analysisResult.Skills.map((skill, index) => <li key={index}>{skill}</li>)
+                                : "No Skills Found"}
+                        </ul>
+                        <h3>Education:</h3>
+                        <ul>
+                            {analysisResult.Education.length > 0
+                                ? analysisResult.Education.map((edu, index) => <li key={index}>{edu}</li>)
+                                : "No Education Details Found"}
+                        </ul>
+                        <h3>Best Role: {analysisResult["Best Role"] || "Not Found"}</h3>
+                        <h3>Role Match Scores:</h3>
+                        <ul>
+                            {Object.entries(analysisResult["All Role Scores"]).map(([role, score]) => (
+                                <li key={role}>
+                                    {role}: {score}%
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                     <p className="message">
-                        <span>Sorry Aditya Bhai,</span> abhi logic part implement kiya hu, data mil raha h backend se, ab design baki h!
+                        <strong>Message:</strong> Keep improving your resume to achieve better role matches!
                     </p>
                 </div>
             )}
@@ -62,6 +98,3 @@ function App() {
 }
 
 export default App;
-
-
-
