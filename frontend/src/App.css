@@ -1,3 +1,4 @@
+/* General Styles */
 .app-container {
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -22,21 +23,30 @@
 
 .upload-section {
   margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .file-input {
   margin-right: 10px;
-  padding: 5px;
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .upload-button {
   padding: 10px 20px;
-  font-size: 1em;
+  font-size: 1.1em;
   background-color: #3498db;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 10px;
 }
 
 .upload-button:hover {
@@ -54,6 +64,7 @@
   padding: 20px;
   border-radius: 10px;
   text-align: left;
+  margin-top: 20px;
 }
 
 .result-title {
@@ -76,4 +87,64 @@
   margin-top: 20px;
   font-size: 1.2em;
   color: #27ae60;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2em;
+  }
+
+  .subtitle {
+    font-size: 1em;
+  }
+
+  .upload-button {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .file-input {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .result-section {
+    padding: 15px;
+  }
+
+  .result-title {
+    font-size: 1.6em;
+  }
+
+  .result-content h3 {
+    font-size: 1.1em;
+  }
+
+  .message {
+    font-size: 1em;
+  }
+}
+
+/* Mobile Small Screen Styles */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8em;
+  }
+
+  .upload-button {
+    font-size: 0.9em;
+  }
+
+  .file-input {
+    padding: 10px;
+  }
+
+  .result-title {
+    font-size: 1.5em;
+  }
+
+  .result-content h3 {
+    font-size: 1em;
+  }
 }
