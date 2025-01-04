@@ -3,10 +3,12 @@ const multer = require("multer");
 const { spawn } = require("child_process");
 const cors = require("cors");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 app.use(cors());
 
+// Set up Multer for file uploads
 const upload = multer({ dest: "uploads/" });
 
 app.post("/upload-resume", upload.single("resume"), (req, res) => {
@@ -15,28 +17,36 @@ app.post("/upload-resume", upload.single("resume"), (req, res) => {
     }
 
     // Invoke Python script
-    const pythonProcess = spawn("python", ["resume_parser.py", req.file.path]);
-    // console.log(pythonProcess)
+    const pythonProcess = spawn("python", ["resume_parser_ml.py", req.file.path]);
 
     let output = "";
+    let errorOutput = "";
+
     pythonProcess.stdout.on("data", (data) => {
         output += data.toString();
-        console.log(output)
     });
 
-    pythonProcess.stderr.on("data", (error) => {
-        console.error("Python error:", error.toString());
+    pythonProcess.stderr.on("data", (data) => {
+        errorOutput += data.toString();
     });
 
-    pythonProcess.on("close", () => {
-        // Send parsed data back to the frontend
+    pythonProcess.on("close", (code) => {
+        // Delete the uploaded file after processing
+        fs.unlink(req.file.path, (err) => {
+            if (err) console.error("Error deleting file:", err);
+        });
+
+        if (code !== 0) {
+            console.error("Python script error:", errorOutput);
+            return res.status(500).json({ error: "Error processing resume" });
+        }
+
         try {
-            // const parsedData = JSON.parse(output);
-            // console.log(parsedData)
-            res.json(output);
+            const parsedData = JSON.parse(output);
+            res.json(parsedData);
         } catch (err) {
+            console.error("Error parsing Python output:", err);
             res.status(500).json({ error: "Error parsing Python output" });
-            // console.log(err)
         }
     });
 });
