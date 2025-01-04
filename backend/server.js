@@ -8,6 +8,9 @@ const fs = require("fs");
 const app = express();
 app.use(cors());
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
+
 // Set up Multer for file uploads
 const upload = multer({ dest: "uploads/" });
 
@@ -49,6 +52,11 @@ app.post("/upload-resume", upload.single("resume"), (req, res) => {
             res.status(500).json({ error: "Error parsing Python output" });
         }
     });
+});
+
+// Serve the homepage (index.html)
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const PORT = 5000;
