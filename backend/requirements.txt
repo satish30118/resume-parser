@@ -1,0 +1,6 @@
+spacy
+textblob
+pdfplumber
+pyttsx3
+pdfminer.six
+en_core_web_sm
