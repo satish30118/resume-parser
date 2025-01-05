@@ -24,7 +24,7 @@ function App() {
         formData.append("resume", file);
 
         try {
-            const response = await axios.post("http://localhost:5000/upload-resume", formData, {
+            const response = await axios.post("https://cvinsight.onrender.com/upload-resume", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
